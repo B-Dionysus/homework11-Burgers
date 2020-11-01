@@ -1,7 +1,48 @@
-<ul>
-{{#each burgers}}
-    <li>{{{burger_name}}}</li>
-{{/each}}
-</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1 spacing"><!-- spacing --></div>
+        <div class="col-4 left menu">
+            <div>
+                <h3>Burger Menu</h3>
+                <ul>
+                {{#each burgers}}
+                   {{#unless devoured}}<li>The {{{burger_name}}}<button class="devour">Devour</button></li>{{/unless}}
+                {{/each}}
+                </ul>
+            </div>            
+            <div class="dropshadow"></div>
+        </div>
+        <div class="col-2 spacing"><!-- divider --></div>
+        <div class="col-4 right menu">
+            <div>
+                <h3>Burgers I've Tried</h3>
+                <ul>
+                {{#each burgers}}
+                   {{#if devoured}}<li>The {{{burger_name}}}</li>{{/if}}
+                {{/each}}
+                </ul>
+            </div>
+            <div class="dropshadow"></div>
+        </div>
+        <div class="col-1 spacing"><!-- spacing --></div>
+    </div>
+    <div class="row">
+        <div class="col-3 spacing"></div>
+        <div class="col-6 submission-form">
+            <form method="POST">
+                <h3>Got suggestions?</h3>
+                <h4>We'd love to hear them!</h4>
+                <label for="new-burger">New Burger:</label>
+                <input id="new-burger" type="text"><input type="submit"></form>
+            <div class="dropshadow"></div>
+        </div>
+        <div class="col-3 spacing"></div>
+    </div>
+</div>
+
+
+
+
+
 {{!-- 
 //     * Create a button in `index.handlebars` that will submit the user input into the database. --}}

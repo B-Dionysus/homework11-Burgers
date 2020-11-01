@@ -6,7 +6,7 @@ const burger=require("../models/burger.js");
 
 function findAll(req, res){
    burger.all((data=>{
-      console.log(data);res.render("index",{burgers:data});}));
+     res.render("index",{burgers:data});}));
 }
 
 module.exports={
