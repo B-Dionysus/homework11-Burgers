@@ -14,13 +14,16 @@ const burger=require("../models/burger.js");
 function findAll(req, res) {
    burger.all((data=>res.render("index",{burgers:data})));
 }
-// Here we pass along the id to be devoured, the boolean value (if we wanted to undevour something
+// Here we pass along the id to be devoured, the boolean value (when we wanted to undevour something
 // we would call this with "false") and a callback function that says to send the user a json object
 // with the data that we receive (in this case, that's just an object with a success key of value "true")
 // This is being expected by the code in public/assets/scripts/index.js
 function devour(req, res, id){
    burger.update(id, "devoured", true, data=>res.json(data));
-}
+};
+function undevour(req, res, id){
+   burger.update(id, "devoured", false, data=>res.json(data));
+};
 // And here we just pass it the user's new name, and teh callback function that will send a json object
 // with the newly-created id, as well as the name again, and some other data we aren't using. This is also
 // going to code in public/assets/scripts/index.js
@@ -31,6 +34,7 @@ function add(req, res, name){
 module.exports={
    findAll,
    devour,
+   undevour,
    add
 }
 

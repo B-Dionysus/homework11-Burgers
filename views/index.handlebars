@@ -18,7 +18,7 @@
                 <h3>Burgers I've Tried</h3>
                 <ul id="right-ul">
                 {{#each burgers}}
-                   {{#if devoured}}<li>The {{{burger_name}}}</li>{{/if}}
+                   {{#if devoured}}<li>The {{{burger_name}}}<button data-id="{{{id}}}" class="undevour">Try Again</button></li></li>{{/if}}
                 {{/each}}
                 </ul>
             </div>
@@ -33,16 +33,9 @@
                 <h3>Got suggestions?</h3>
                 <h4>We'd love to hear them!</h4>
                 <label for="new-burger">New Burger:</label>
-                <input id="new-burger" type="text" maxlength="15"><input type="submit"></form>
+                <input id="new-burger" type="text" maxlength="13"><input type="submit"></form>
             <div class="dropshadow"></div>
         </div>
         <div class="col-3 spacing"></div>
     </div>
 </div>
-
-
-
-
-
-{{!-- 
-//     * Create a button in `index.handlebars` that will submit the user input into the database. --}}
