@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars')
 
 const db = require('./models/burger.js');
 
-const routes = require('./routes/api-routes.js');
+const routes = require('./routes/routes.js');
 
 // create an instance of express
 const app = express();

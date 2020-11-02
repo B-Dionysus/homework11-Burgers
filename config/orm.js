@@ -1,15 +1,17 @@
 const connection = require("./connections.js");
 
-// * In the `orm.js` file, create the methods that will execute the necessary MySQL commands in the controllers. These are the methods you will need to use in order to retrieve and store data in your database.
-
+// Orm.js is completely project agnostic, and receives all of the data from the model (burger.js, in this case).
+// After it gets a response from the database it puts call the callback function, returning the data
 const orm={
+    // For select all, we are returning an array of all of the data from every row in whatever table was requested
     selectAll: (table, cb)=>{
         connection.query(`SELECT * from ${table}`, (err, result)=>{
             if(err) throw err;
             cb(result);
         })
     },
-    // orm.update("burgers", col, val, id, data=>cb(data))
+    // For updated, we are returning an object with a key of "success" and a value of "true", unless there's
+    // an error
     update:(table, col, val, id, cb)=>{
         let query="UPDATE ?? set ??=? where id=?";
         connection.query(query, [table, col, val, id], (err, results)=>{
@@ -17,6 +19,8 @@ const orm={
             else cb({success:true});
         })
     },
+    // And for insert, we're returning all of the same values that were passed to us, as well as
+    // success:true and the new object's id.
     insert:(table, col1, col2, val1, val2, cb)=>{
         let query="INSERT into ?? (??, ??) VALUES(?, ?)"
         connection.query(query, [table, col1, col2, val1, val2], (err, results)=>{
@@ -27,9 +31,4 @@ const orm={
 
     }
 }
-
-// * `insertOne()`
-// * `updateOne()`
-
-// * Export the ORM object in `module.exports`.
 module.exports=orm;
