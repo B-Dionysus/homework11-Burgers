@@ -8,6 +8,14 @@ const orm={
             if(err) throw err;
             cb(result);
         })
+    },
+    // orm.update("burgers", col, val, id, data=>cb(data))
+    update:(table, col, val, id, cb)=>{
+        let query=`UPDATE ?? set ??=? where id=?`;
+        connection.query(query, [table, col, val, id], (err, results)=>{
+            if(err) throw err;
+            else cb({success:true});
+        })
     }
 }
 

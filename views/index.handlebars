@@ -1,22 +1,22 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-1 spacing"><!-- spacing --></div>
-        <div class="col-4 left menu">
+        <div class="col-4 left menu" id="left-menu">
             <div>
                 <h3>Burger Menu</h3>
-                <ul>
+                <ul id="left-ul">
                 {{#each burgers}}
-                   {{#unless devoured}}<li>The {{{burger_name}}}<button class="devour">Devour</button></li>{{/unless}}
+                   {{#unless devoured}}<li>The {{{burger_name}}}<button data-id="{{{id}}}" class="devour">Devour</button></li>{{/unless}}
                 {{/each}}
                 </ul>
             </div>            
             <div class="dropshadow"></div>
         </div>
         <div class="col-2 spacing"><!-- divider --></div>
-        <div class="col-4 right menu">
+        <div class="col-4 right menu" id="right-menu">
             <div>
                 <h3>Burgers I've Tried</h3>
-                <ul>
+                <ul id="right-ul">
                 {{#each burgers}}
                    {{#if devoured}}<li>The {{{burger_name}}}</li>{{/if}}
                 {{/each}}
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-3 spacing"></div>
         <div class="col-6 submission-form">
-            <form method="POST">
+            <form method="POST" id="user-subs">
                 <h3>Got suggestions?</h3>
                 <h4>We'd love to hear them!</h4>
                 <label for="new-burger">New Burger:</label>

@@ -8,8 +8,12 @@ function findAll(req, res){
    burger.all((data=>{
      res.render("index",{burgers:data});}));
 }
+function devour(req, res, id){
+   burger.update(id, "devoured", true, data=>res.json(data));
+}
 
 module.exports={
-   findAll
+   findAll,
+   devour,
 }
 
