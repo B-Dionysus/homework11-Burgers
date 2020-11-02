@@ -11,11 +11,20 @@ const orm={
     },
     // orm.update("burgers", col, val, id, data=>cb(data))
     update:(table, col, val, id, cb)=>{
-        let query=`UPDATE ?? set ??=? where id=?`;
+        let query="UPDATE ?? set ??=? where id=?";
         connection.query(query, [table, col, val, id], (err, results)=>{
             if(err) throw err;
             else cb({success:true});
         })
+    },
+    insert:(table, col1, col2, val1, val2, cb)=>{
+        let query="INSERT into ?? (??, ??) VALUES(?, ?)"
+        connection.query(query, [table, col1, col2, val1, val2], (err, results)=>{
+            if(err) throw err;
+            else {
+                cb({success: true, id:results.insertId, col1:col1, col2:col2, val1:val1, val2:val2});}
+        })
+
     }
 }
 

@@ -11,9 +11,13 @@ function findAll(req, res){
 function devour(req, res, id){
    burger.update(id, "devoured", true, data=>res.json(data));
 }
+function add(req, res, name){
+   burger.insert(name, data=>res.json(data));
+}
 
 module.exports={
    findAll,
    devour,
+   add
 }
 
