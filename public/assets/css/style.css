@@ -25,7 +25,7 @@ body{
     
     font-family: 'Architects Daughter', cursive;
 }
-.devour{
+.devour, .undevour{
     padding: 4px;
     font-size: small;
     float: right;
@@ -72,7 +72,7 @@ body{
         font-size:small;
         margin:0;
     }
-    .devour{
+    .devour, .undevour{
         font-size:smaller;
     }
     .submission-form {        
@@ -98,7 +98,7 @@ body{
     .spacing{
         display:none;
     }    
-    .submission-form,.devour {        
+    .submission-form,.devour, .undevour {        
         font-size:10px;
     }
     .submission-form h4, h3{        

@@ -1,9 +1,9 @@
 $("document").ready(init);
 
 function init(){
-    // Add clickEvents to every Devour button
-    setUpButtons();
-
+    // Add clickEvents to every button
+    setUpDevourButtons();
+    setUpUndevourButtons();
     // When the user submits something
     $("#user-subs").on("submit",e=>{
         e.preventDefault();      
@@ -36,9 +36,6 @@ function init(){
                 // And the the list element with our new name
                 let newBurger=($("<li>").text("The "+result.val1.trim())).append(newButton);
                 $("#left-ul").append(newBurger);
-
-                // Finally, we need to make sure that our new button has the click event associated with it
-                setUpButtons();
             }
         })
     })
@@ -67,21 +64,48 @@ function titleCase(n){
 }
 
 // Set up a click event for every button with the "devour" class
-function setUpButtons(){
-    $(".devour").on("click",e=>{
+function setUpDevourButtons(){
+    $(document).on("click",".devour",e=>{
         let id=$(e.currentTarget).data("id");
         $.post(`/api/devour/${id}`,result=>{
             // A result of "success" means that the burger as been devoured. Instead of reloading the
             // page, we can just move it to the appropriate place right now.
             if(result.success){
-                let burgers=$("li");
+                let burgers=$("#left-ul li");
                 for(burg of burgers){
                     // We have to traverse our list of burgers until we find the right one. The id is buried
                     // in the button tag, though, so we have to traverse the element until we find the id
                     if($(burg).children().last().data("id")===id){
-                        // If we've got it, we stick it on the right side and remove the button!
+                        // If we've got it, we stick it on the right side and remove the button, then add a new one
                         $("#right-ul").append($(burg));
                         $(burg).children().last().remove();
+                        $(burg).append($("<button>").addClass("undevour").data("id", id).html("Try Again"));
+
+                    }
+                }
+            }
+        })
+    })
+}
+
+// Set up a click event for every button with the "devour" class
+function setUpUndevourButtons(){
+    $(document).on("click",".undevour", e=>{
+        let id=$(e.currentTarget).data("id");
+        $.post(`/api/undevour/${id}`,result=>{
+            // A result of "success" means that the burger as been undevoured. Instead of reloading the
+            // page, we can just move it to the appropriate place right now.
+            if(result.success){
+                let burgers=$("#right-ul li");
+                for(burg of burgers){
+                    // We have to traverse our list of burgers until we find the right one. The id is buried
+                    // in the button tag, though, so we have to traverse the element until we find the id
+                    if($(burg).children().last().data("id")===id){
+                        console.log("Hiya");
+                        // If we've got it, we stick it on the left side and remove the button, and then add a new one
+                        $("#left-ul").append($(burg));
+                        $(burg).children().last().remove();                        
+                        $(burg).append($("<button>").addClass("devour").data("id", id).html("Devour"));
                     }
                 }
             }
